@@ -2,17 +2,6 @@
 -- By Michael Fox
 
 -- ****************************************************************
--- USER CONFIG AREA - ONLY EDIT THIS BIT
--- ****************************************************************
-
-local oosSeq = { -- Array for OOS Sync Sequences
-    11,
-    12,
-    13,
-    14
-}
-
--- ****************************************************************
 -- local plugin variables
 -- ****************************************************************
 
@@ -20,10 +9,6 @@ local pluginName = select(1, ...);
 local pluginComponent = select(2, ...);
 local signals = select(3, ...);
 local handles = select(4, ...);
-
--- global function cache
-local C = Cmd -- Execute commandline string
-local E = Echo -- Echo to System Monitor
 
  -- function lookup table
 local functions = {}
@@ -34,6 +19,14 @@ local maxOOS = 8
 -- ****************************************************************
 -- helper functions
 -- ****************************************************************
+
+local function C(s, ...)
+    Cmd(string.format(s, ...));
+end
+
+local function E(s, ...)
+    Echo(string.format(s, ...));
+end
 
 local function isempty(s)
     return s == nil or s == ''
@@ -68,7 +61,7 @@ local function baseWindow()
 end
 
 local function notInstalledWarning()
-    MB({
+    MessageBox({
         title = "Warning",
         message = "Please install the Plugin before trying to configure anthing.",
         commands = {{value = 1, name = "Ok"}},
