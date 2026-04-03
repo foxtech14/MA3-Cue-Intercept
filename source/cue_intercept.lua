@@ -113,10 +113,16 @@ local function createMacros()
         -- convert user input
         local num = clamp(tonumber(macroNum.inputs['Macro']), 1, 9999);
         local cmd1 = 'Call Plugin "BBLX Cue Intercept" "execute"';
+        local cmd2 = 'Call Plugin "BBLX Cue Intercept" "updateTriggers"';
 
         C("Store Macro %s.1", num);
         C("Set Macro %s.1 Property 'Command' '%s'", num, cmd1);
         C("Label Macro %s '%s'", num, "Run Q Intercept");
+
+        num = num + 1;
+        C("Store Macro %s.1", num);
+        C("Set Macro %s.1 Property 'Command' '%s'", num, cmd2);
+        C("Label Macro %s '%s'", num, "Update Cue Command Triggers");
     end
 end
 
